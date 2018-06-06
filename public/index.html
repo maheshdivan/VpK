@@ -1,0 +1,469 @@
+<!doctype html>  
+<html lang="en">
+    <head>
+        <title>VpK</title>
+
+		<!-- Copyright 2018 Dave Weilert
+
+		Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
+		and associated documentation files (the "Software"), to deal in the Software without restriction, 
+		including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+		and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, 
+		subject to the following conditions:
+
+		The above copyright notice and this permission notice shall be included in all copies or substantial 
+		portions of the Software.
+
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT 
+		LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+		IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+		WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+		SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		-->
+
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Images -->
+        <link rel="icon" type="image/png" href="images/vpk.png">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Bootstrap-table CSS -->
+        <link rel="stylesheet" href="css/bootstrap-table.min.css">
+        <!-- Sidenav CSS -->
+        <link rel="stylesheet" href="css/sidenav.css">
+        <!-- Dropzone CSS -->
+        <link rel="stylesheet" href="css/dropzone.css">
+        <!-- Dropzone file drop area CSS -->
+        <style>
+            .dropzone {
+            background: white;
+            border-radius: 5px;
+            border: 2px dashed rgb(0, 135, 247);
+            border-image: none;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            }
+        </style>
+        <!-- Scripts -->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-table.min.js"></script>
+        <script src="js/dropzone.js"></script>
+    </head>
+    <body>
+        <!-- ==================================== -->
+        <!-- Side nav section                     -->
+        <!-- ==================================== -->
+        <div id="sideNavigation" class="sidenav">
+            <span style="margin-top: 10px; margin-bottom: 20px;">
+            <img class="mx-auto d-block" src="images/vpk.png" alt="VpK" height="60" width="60">
+            </span>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="javascript:about()">About</a>
+            <span style="color: white; padding-left: 15px; padding-top: 20px;">Documentation</span>
+            <a href="https://github.com/daveweilert/vpk#installation" target="_blank">Installation</a>
+            <a href="https://github.com/daveweilert/vpk#usage" target="_blank">Usage</a>
+            <span style="color: white; padding-left: 15px;">Directory</span><br>
+            <a href="javascript:changeDir()">Change directory</a>
+            <a href="javascript:fileUpload()">FileUpload</a>
+            <a href="javascript:dirStats()">Statistics</a>
+             <span style="color: white; padding-left: 15px;">Cluster</span><br>
+            <a href="javascript:getCluster()">Cluster Info</a>
+            <span style="color: white; padding-left: 15px;">Logs</span>
+            <a href="javascript:viewLog()">View</a>
+            <a href="javascript:clearLog()">Clear</a>
+        </div>
+        <div id="main">
+            <!-- ==================================== -->
+            <!-- Header section                       -->
+            <!-- ==================================== -->
+            <div class="container">
+                <div class="container" id="titlebar" style="margin-top: 10px;">
+                    <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm pull-xs-left float-left" id="menuButton" type="button" onclick="openNav()">
+                    &#9776;
+                    </button>
+                    <h4><a href="javascript:about()"><img src="images/vpk.png" alt="VpK" height="40" width="40" class="float-right"></a>
+                        <span style="margin-left: 20px; font-family: Arial Rounded MT Bold, Helvetica Rounded, Arial, sans-serif;">Visual parsed Kubernetes</span>
+                    </h4>
+                </div>
+            </div>
+            <!-- ==================================== -->
+            <!-- Search section                       -->
+            <!-- ==================================== -->
+            <div class= "container">
+                <hr>
+                <div class="container">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#filterbar" style="margin: 5px;">
+                    Toggle filter & search
+                    </button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="container" id="filterbar">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="#">&nbsp;</a>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li>
+                                    <div class="form-group">
+                                        <label for="namespaceFilter">Namespace filter</label>
+                                        <select class="form-control form-control-sm" id="namespaceFilter">
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group"  style="margin-left: 40px;">
+                                        <label for="searchTypeSelect">Search type filter</label>
+                                        <select class="form-control form-control-sm" id="searchType">
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="tooltip"  data-placement="top" 
+                                    	title="Search type items that are user defined end with (U).  All other entries 
+                                        are Kubernetes object definition 'kinds'.">
+                                    <img src="images/info.png" height="20" width="20" class="float-right">  
+                                    </a>
+                                </li>
+                            </ul>
+                            <form class="form-inline my-2 my-lg-0">
+                                <input id="searchKeys" class="form-control mr-sm-2" type="search" 
+                                    placeholder="Search value" aria-label="Search value"
+                                    data-toggle="tooltip" data-placement="top" 
+                                    title="Leave 'Search value' blank to find all entries that match 
+                                    Namespace and Search type filters.">
+                                <button id="searchBtn" class="btn btn-outline-primary my-2 my-sm-0 btn-sm" 
+                                    onclick="searchObj()">
+                                	Search
+                                </button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- ==================================== -->
+            <!-- Search results section               -->
+            <!-- ==================================== -->
+            <div class= "container">
+                <hr>
+                <div class= "container">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#searchR" style="margin: 5px;">
+                    Toggle search results
+                    </button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="container" id="searchR">
+                    <div id="searchResults">
+                        <span class="float-right">
+                        <button class="btn btn-outline-primary  btn-sm" type="button" onclick="check()" style="margin-bottom: 5px;">View multiple</button>
+                        </span>
+                        <table id="searchTable"
+                            data-toggle="table"
+                            data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="cb">
+                                        <a href="#" data-toggle="tooltip" data-placement="left" 
+                                    		title="Select one or more items and press the 
+                                    		button labeled 'View multiple'.">
+                                    		<img src="images/info.png" height="20" width="20">  
+                                    	</a>
+                                    </th>
+                                    <th data-field="namespace">Namespace</th>
+                                    <th data-field="kind">Kind / Type</th>
+                                    <th data-field="name">Name / Value</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody id="searchData">
+                                <!-- resutls built in vpkmain.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- ==================================== -->
+            <!-- Kube object display section          -->
+            <!-- ==================================== -->
+            <div class= "container">
+                <hr>
+                <div class= "container">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#svgResults" style="margin: 5px;">
+                    Toggle display 
+                    </button>
+                </div>
+            </div>
+            <!-- SVG images are shown here -->		        
+            <div class="container" style="margin-top: 5px;">
+                <div class="container">
+                    <div id="svgResults">
+                        <!-- Objects are built in vpksvg.js -->
+                    </div>
+                </div>
+            </div>
+            <!-- ==================================== -->
+            <!-- Directory info section               -->
+            <!-- ==================================== -->
+            <div class="container">
+                <hr>
+                <div class="container">
+                    <div class="form-group row">
+                        <label for="inputDir" class="col-2 col-form-label float-right">Input directory</label>
+                        <div class="col-10" id="baseDir">
+                            <input type="text" class="form-control" placeholder="not provided" disabled="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ==================================== -->
+            <!-- defintion file Modal section         -->
+            <!-- ==================================== -->
+            <div class="modal fade" id="defFileModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div id="defHeader">
+                                <h6 class="modal-title" id="defTitle">Object Definition</h6>
+                                <h6 class="modal-title" id="defPart"></h6>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div id="defContents" style="font-family: Lucida Console, monospace !important; font-size: 80%;">
+                            <p>Nothing here</P>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- ==================================== -->
+        <!-- Running environment/cluster section  -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="clusterModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="clusterHeader">
+                            <h6 class="modal-title">Cluster Information</h6>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <label for="clusterIP" style="padding-top: 15px;">Cluster IP</label>
+                        <div class="input-group">
+                            <input id="clusterIP" type="text" class="form-control form-control-sm col-4" placeholder="https://192.168.10.99">
+						</div>
+
+                        <label for="clusterPort" style="padding-top: 15px;">Cluster Port</label>
+                        <div class="input-group">
+                            <input id="clusterPort" type="text" class="form-control form-control-sm col-1" placeholder="8443">
+						</div>
+						
+                        <label for="clusterName" style="padding-top: 15px;">Cluster Name</label>
+                        <div class="input-group">
+                            <input id="clusterName" type="text" class="form-control form-control-sm col-4" placeholder="mycluster.icp">
+						</div>
+						
+                        <label for="clusterNamespace" style="padding-top: 15px;">Namespace</label>
+                        <div class="input-group">
+                            <input id="clusterNamespace" type="text" class="form-control form-control-sm col-4" placeholder="namespace">
+						</div>
+                        
+                        <label for="clusterUser" style="padding-top: 15px;">User id</label>
+                        <div class="input-group">
+                            <input id="clusterUser" type="text" class="form-control form-control-sm col-4" placeholder="User id">
+						</div>
+						
+                        <label for="clusterPassword" style="padding-top: 15px;">Password</label>
+                        <div class="input-group">
+                            <input id="clusterPassword" type="password" class="form-control form-control-sm col-4" placeholder="Password">
+                        </div>
+						<div style="padding-top: 20px;">
+						    <button id="clusterBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="dynamic()" style="margin: 5px;">
+                            Validate/Load
+                            </button>
+
+						</div>
+                        <div id="clusterStatus">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ==================================== -->
+        <!-- Change directory Modal section       -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="chgDirModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="dirHeader">
+                            <h6 class="modal-title">Change Directory</h6>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input id="newDir" type="text" class="form-control form-control-sm" placeholder="New full directory path">
+                            <button id="validateBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="reload()" style="margin: 5px;">
+                            Validate/Load
+                            </button>
+                        </div>
+                        <div id="loadStatus">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================================== -->
+        <!-- About Modal section                  -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Visual parsed Kubernetes<br>
+                            <span id="version" style="font-size: 60%""></span>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div style="background-color: #eee;">
+                        <div class="align-middle">
+                            <div style="font-size: 80%; text-align: center; margin-top: 25px; margin-bottom: 25px;">TECHNOLOGIES USED</div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="images/bootstrap-stack.png" style="height:40px; width:auto;" class="mx-auto d-block">
+                                </div>
+                                <div class="col-sm-3" style="margin-top: 10px;">
+                                    <img src="images/dropzone.svg" style="height:22px; width:auto;" class="mx-auto d-block">
+                                </div>
+                                <div class="col-sm-3" style="margin-top: 15px;">
+                                    <img src="images/jQuery.png" style="height:18px; width:auto;" class="mx-auto d-block">
+                                </div>
+                                <div class="col-sm-3" style="margin-top: 5px;">
+                                    <img src="images/nodejs.png" style="height:25px; width:auto;" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background-color: #eee;">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================================== -->
+        <!-- Server log Modal section             -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="logModal" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="logHeader">
+                            <h6 class="modal-title">Log file</h6>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div id="logContents" style="font-size: 70%;">
+                            <p>Log file data</P>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- ==================================== -->
+        <!-- File upload Modal section            -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="logHeader">
+                            <h5 class="modal-title">File upload</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-left: 35px; margin-right: 25px;">
+                            <p>Specify the server target directory for file upload.  If it does not exist it will be created</p>
+                        </div>
+                        <div class="input-group col-10" style="margin-bottom:20px; margin-left: 25px;">
+                            <input id="uploadDir" type="text" class="form-control form-control-sm" placeholder="Target directory">
+                            <button id="fileDirBtn" type="button" class="btn btn-outline-primary btn-sm" style="margin: 5px;">
+                            Process
+                            </button>
+                        </div>
+                        <div id="uploadStatus" style="margin-left: 35px; margin-right: 25px; margin-bottom: 15px;">
+                        </div>
+                        <div id="filedropzone">
+                            <form action="/upload" class="dropzone needsclick" id="file-upload-dropzone">
+                                <div class="dz-message needsclick">
+                                    Drop files here or click to upload.<br />
+                                    <span class="note needsclick"></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- ==================================== -->
+        <!-- Directory stats Modal section        -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="statsHeader">
+                            <h5 class="modal-title">Directory statistics</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div id="statContents" style="font-size: 100%;">
+                            <p>Log file data</P>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- ==================================== -->
+        <!-- Scripts section                      -->
+        <!-- ==================================== -->
+        <!-- Socket.io Script -->
+        <script src="/socket.io/socket.io.js"></script> 
+        <!-- VPK Script -->
+        <script src="js/vpkmain.js"></script>
+        <script src="js/vpksvg.js"></script>
+        <script src="js/vpkobjdef.js"></script>
+        <script src="js/vpklogfile.js"></script>
+    </body>
+</html>
