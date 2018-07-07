@@ -110,7 +110,10 @@ function objectDef(data) {
             }           
         }
         
-        if (defkey === 'readinessProbe' || defkey === 'tolerations' || defkey === 'livenessProbe'  || defkey === 'lifecycle') {
+        if (defkey === 'readinessProbe' || defkey === 'tolerations' || defkey === 'livenessProbe'  || defkey === 'lifecycle' || defkey === 'nodeSelector'
+         || defkey === 'args' || defkey === 'command' || defkey === 'env' ) {
+            
+            //append colon
             defkey = defkey + ':'
         }
         

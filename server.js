@@ -40,11 +40,15 @@ var YAML = require('js-yaml');
 var commandLineArgs = require('command-line-args');
 var commandLineUsage = require('command-line-usage');
 var chalk = require('chalk');
-
 var multer = require('multer');
 var path = require('path');
 var compression = require('compression');
 var cors = require('cors');
+
+
+//------------------------------------------------------------------------------
+// Application variables
+//------------------------------------------------------------------------------
 var dest = './uploads'
 var zips = [];
 var targz = [];
@@ -164,65 +168,6 @@ app.use(cors());
 app.get('/', function(req, res) {
     res.sendfile(__dirname + '/public/index.html');
 });
-
-/*
-app.get('/kube', function(req, res) {
-    var rtn = '';
-    kube.getAuthToken()
-        .then(function(result) {
-            if (result.startsWith('FAIL') || result.startsWith('Fail')) {
-                utl.logMsg('iarICP600 - Failed: Result: ' + result);
-                rnt = 'FAIL';
-                res.writeHead(200, {
-                    'Content-Type': 'text/plain'
-                });
-                res.end(rtn);
-            } else {
-                utl.logMsg('iarICP601 - Get namespace success');
-                kube.authenticateSession(result)
-                rtn = kube.getNamespaceInfo('kube-system');
-
-
-                //	if (dynamicDir()) {
-                var yf = JSON.parse(rtn);
-                var fbase = 'config';
-                var fnum = 100;
-                var fn;
-                var dynDir = process.cwd();
-                dynDir = dynDir + '/cluster';
-                var input;
-
-                for (var i = 0; i < yf.items.length; i++) {
-                    input = yf.items[i];
-                    input = JSON.stringify(input, null, 4);
-                    fnum++;
-                    fn = dynDir + '/' + fbase + fnum + '.yaml';
-                    fs.writeFileSync(fn, input);
-                    utl.logMsg('iarLDP055 - Created file: ' + fn, 'server');
-                }
-                // load newly created files
-                reload(dynDir);
-
-                var result = {
-                    'baseDir': dynDir,
-                    'validDir': true
-                };
-                client.emit('resetResults', result);
-                res.writeHead(200, {
-                    'Content-Type': 'text/plain'
-                });
-                res.end('Kube invoked succeeded\n' + rtn);
-
-
-            }
-        })
-        .catch(function(err) {
-            utl.logMsg('iarICP602 - Processing error, message: ' + err, 'icp');
-            deferred.resolve('Failed - Processing error, message: ' + err);
-        });
-
-});
-*/
 
 
 app.get('/ping', function(req, res) {
@@ -627,10 +572,10 @@ function checkLoop() {
         checkAgain();
     } else {
         saveStatMsg('dl', 0);
-        saveStatMsg('Dirs read               ', vpk.dCnt);
-        saveStatMsg('Files read              ', vpk.fCnt);
-        saveStatMsg('Kube YAML               ', vpk.yCnt);
-        saveStatMsg('Skipped                 ', vpk.xCnt);
+        saveStatMsg('Dirs read                  ', vpk.dCnt);
+        saveStatMsg('Files read                 ', vpk.fCnt);
+        saveStatMsg('Kube YAML                  ', vpk.yCnt);
+        saveStatMsg('Skipped                    ', vpk.xCnt);
         saveStatMsg('dl', 0);
         saveStatMsg('Search arrays built', ' ');
         saveStatMsg('dl', 0);
@@ -667,14 +612,18 @@ function checkLoop() {
         saveStatMsg('StatefulSets               ', vpk.statefulSetsCnt);
         saveStatMsg('StorageClasses             ', vpk.storageClassCnt);
         saveStatMsg('dl', 0);
-        saveStatMsg('Definition file(s)         ', vpk.fileContentCnt);
-        saveStatMsg('InitContainer              ', vpk.iContainerCnt);
+        saveStatMsg('Args                       ', vpk.argsCnt);
+        saveStatMsg('Command                    ', vpk.commandCnt);
         saveStatMsg('ContainerName              ', vpk.containerNameCnt);
         saveStatMsg('ContainerImage             ', vpk.containerImageCnt);
+        saveStatMsg('Env                        ', vpk.envCnt);
+        saveStatMsg('InitContainer              ', vpk.iContainerCnt);
         saveStatMsg('Labels                     ', vpk.labelsCnt);
         saveStatMsg('Labels (specTemplate)      ', vpk.labelsSpecTemplateCnt);
         saveStatMsg('Labels (specSelector)      ', vpk.labelsSpecSelectorCnt);
+        saveStatMsg('LivenessProbe              ', vpk.livenessProbeCnt);
         saveStatMsg('NodeSelector               ', vpk.nodeSelectorCnt);
+        saveStatMsg('ReadinessProbe             ', vpk.readinessProbeCnt);
         saveStatMsg('Selector (labels)          ', vpk.selectorLabelsCnt);
         saveStatMsg('VolumeAttachment           ', vpk.volumeAttachmentCnt);
         saveStatMsg('VolumeMount                ', vpk.volumeMountsCnt);

@@ -25,7 +25,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // build svg data from returned data
 //----------------------------------------------------------
 function svgResult(data) {
-    //console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data));
     var sbase = ' ';
     var tmp = ' ';
     var ns;
@@ -193,9 +193,15 @@ function setData(type) {
             case 'APIService':
                 data.push('330033');
                 break;
+            case 'Args':
+                data.push('440033');
+                break;
             case 'CertificateSigningRequest':
                 data.push('003399');
                 data.push('Cert\'Sign\'Req')
+                break;
+            case 'Command':
+                data.push('003399');
                 break;
             case 'ConfigMap':
                 data.push('003399');
@@ -233,6 +239,9 @@ function setData(type) {
                 break;
             case 'Endpoints':
                 data.push('330033');
+                break;
+            case 'Env':
+                data.push('003399');
                 break;
             case 'HorizontalPodAutoscaler':
                 data.push('df3a01');
