@@ -374,7 +374,7 @@ io.on('connection', function(client) {
     });
 
     client.on('getSvg', function(data) {
-        utl.logMsg('vpkMNL007 - Build SVG request', 'server');
+        utl.logMsg('vpkMNL007 - Build SVG request ' + data, 'server');
         var result = gensvg.build(data);
         client.emit('svgResult', result);
     });
@@ -403,7 +403,7 @@ io.on('connection', function(client) {
     });
 
     client.on('search', function(data) {
-        utl.logMsg('vpkMNL005 - Search request', 'server');
+        utl.logMsg('vpkMNL005 - Search for ' + data.searchType + ' in ' + data.namespaceFilter, 'server');
         var result = search.process(data);
         client.emit('searchResult', result);
     });

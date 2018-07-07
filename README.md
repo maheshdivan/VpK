@@ -433,8 +433,9 @@ The following table lists the 'types' that will be parsed from the definition fi
 | Labels | Kubernetes sub-param | Multiple |
 | LimitRange | Kubernetes resource type | Metadata |
 | List | User defined type | User | Y
-| Liveness | Kubernetes sub-param | Workload | Y
+| LivenessProbe | Kubernetes sub-param | Workload | Y
 | Namespace  | Kubernetes resource type | Cluster |
+| NetworkPolicy| Kubernetes resource type | Cluster |
 | Node | Kubernetes resource type | Cluster |
 | NodeSelector | Kubernetes sub-param | Workload | Y
 | PersistentVolumeClaim	| Kubernetes resource type | Config & Storage |
@@ -444,8 +445,7 @@ The following table lists the 'types' that will be parsed from the definition fi
 | PodPreset | Kubernetes resource type | Metadata | 
 | PodSecurityPolicy	| Kubernetes resource type | Metadata |
 | PriorityClass | Kubernetes API type | Metadata |
-| NetworkPolicy| Kubernetes resource type | Cluster |
-| Readiness | Kubernetes sub-param | Workload | Y
+| ReadinessProbe | Kubernetes sub-param | Workload | Y
 | ReplicaSet | Kubernetes resource type | Workload |
 | ReplicationController | Kubernetes resource type | Workload | 
 | ResourceQuota | Kubernetes resource type | Cluster |
