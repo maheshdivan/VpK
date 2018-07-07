@@ -470,7 +470,7 @@ The following table lists the 'types' that will be parsed from the definition fi
 
 Dave Weilert
 
-http://github.com/daveweilert/vpk.git/  
+https://github.com/IBM-ICP-CoC/VpK 
 
 
 ## License
