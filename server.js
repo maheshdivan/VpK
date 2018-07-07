@@ -20,6 +20,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
 //------------------------------------------------------------------------------
+// Software version
+//------------------------------------------------------------------------------
+var softwareVersion = '2.2.0';
+
+//------------------------------------------------------------------------------
 // Require statements
 //------------------------------------------------------------------------------
 var vpk = require('./lib/vpk');
@@ -96,13 +101,16 @@ var optionDefinitions = [{
 ];
 
 var bb = chalk.green;
-var VPK_TITLE = chalk.bold.underline('Visual parsed Kubernetes');
+var VPK_TITLE = chalk.bold.underline('Visual parsed Kubernetes' );
+var VPK_VERSION = chalk.bold.underline('Version: ' + softwareVersion );
 
 // Do not change the spacing of the following VPK_HEADER, and 
 // do not delete the single tick mark
 var VPK_HEADER = `
-  ${bb('\\˜˜\\')}        ${bb('/˜˜/')}        ${bb('|˜˜|  /˜˜/')}   ${VPK_TITLE}
-   ${bb('\\  \\')}      ${bb('/  /')}         ${bb('|  | /  /')}                      
+${bb('-----------------------------------------------------------------')}
+ ${''}              
+  ${bb('\\˜˜\\')}        ${bb('/˜˜/')}        ${bb('|˜˜|  /˜˜/')}   ${bb(VPK_TITLE)}
+   ${bb('\\  \\')}      ${bb('/  /')}         ${bb('|  | /  /')}    ${bb(VPK_VERSION)}                  
     ${bb('\\  \\')}    ${bb('/  /')}          ${bb('|  |/  /')} 
      ${bb('\\  \\')}  ${bb('/  /')}           ${bb('|      \\')}
       ${bb('\\  \\')}${bb('/  /')}   ${bb('||˜˜˜\\\\')}  ${bb('|  |˜\\  \\')}
@@ -110,9 +118,9 @@ var VPK_HEADER = `
         ${bb('\\')}${bb('__/')}     ${bb('||___//')}  ${bb('|__|   \\__\\')}
                  ${bb('||')}
                  ${bb('||')}
+${bb('-----------------------------------------------------------------')}              
   `
 //Do not delete the single tick mark above
-
 
 // reset all vars that are used for parsing
 vpkReset.resetAll();
@@ -378,6 +386,14 @@ io.on('connection', function(client) {
         var result = gensvg.build(data);
         client.emit('svgResult', result);
     });
+
+
+    client.on('getVersion', function(data) {
+        utl.logMsg('vpkMNL091 - Get software version request ', 'server');
+        var result = {'version': softwareVersion};
+        client.emit('version', result);
+    });
+
 
     client.on('reload', function(data) {
         utl.logMsg('vpkMNL009 - Load directory: ' + data, 'server');
@@ -687,5 +703,6 @@ function splash() {
     }]);
     console.log(adv);
 }
+
 //begin processing
 checkLoop();

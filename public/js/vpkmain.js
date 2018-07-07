@@ -22,7 +22,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 // Global vars 
-var version = '2.1.0';
+var version = 'Get from server';
 
 var socket = io.connect();
 
@@ -40,6 +40,8 @@ var files;
 // document ready
 //----------------------------------------------------------
 $(document).ready(function() {
+
+    getVersion();
 
     $("#searchBtn").click(function(e) {
         e.preventDefault();
@@ -200,45 +202,14 @@ socket.on('uploadDirResult', function(data) {
     }
 });
 
+socket.on('version', function(data) {
+    version = data.version;
+});
+
+
 //----------------------------------------------------------
 // socket io definitions for out-bound
 //----------------------------------------------------------
-
-// send request to server to get drop down list data
-function getSelectLists() {
-    socket.emit('getSelectLists');
-}
-
-// send request to server to get directory stats
-function getDirStats() {
-    socket.emit('getDirStats');
-}
-
-// request to clear directory stats
-function clearStats() {
-    $("#statsData").empty();
-    $("#statsData").html('');
-}
-
-// send request to server to search for data
-function searchObj() {
-    var namespaceFilter = $("#namespaceFilter option:selected").text();
-    var searchType = $("#searchType option:selected").text();
-    var searchValue = $("#searchKeys").val();
-    var data = {
-        "searchValue": searchValue,
-        "namespaceFilter": namespaceFilter,
-        "searchType": searchType
-    }
-    socket.emit('search', data);
-}
-
-// send request to server to get SVG data for ojbect
-function getSvg(obj) {
-    var gArray = [];
-    gArray.push(obj);
-    socket.emit('getSvg', gArray);
-}
 
 // loop and check for rows with checkbox checked and get SVG data
 function check() {
@@ -255,9 +226,37 @@ function check() {
     }
 }
 
+// request to clear directory stats
+function clearStats() {
+    $("#statsData").empty();
+    $("#statsData").html('');
+}
+
 // send request to server to get object definition
 function getDef(def) {
     socket.emit('getDef', def);
+}
+
+// send request to server to get directory stats
+function getDirStats() {
+    socket.emit('getDirStats');
+}
+
+// send request to server to get drop down list data
+function getSelectLists() {
+    socket.emit('getSelectLists');
+}
+
+// send request to server to get software version
+function getVersion() {
+    socket.emit('getVersion');
+}
+
+// send request to server to get SVG data for ojbect
+function getSvg(obj) {
+    var gArray = [];
+    gArray.push(obj);
+    socket.emit('getSvg', gArray);
 }
 
 // send request to load new directory
@@ -267,6 +266,19 @@ function reload() {
     $("#loadStatus").empty();
     $("#loadStatus").html('');
     $("#loadStatus").html('<br><p>Processing request to set directory.</p>');
+}
+
+// send request to server to search for data
+function searchObj() {
+    var namespaceFilter = $("#namespaceFilter option:selected").text();
+    var searchType = $("#searchType option:selected").text();
+    var searchValue = $("#searchKeys").val();
+    var data = {
+        "searchValue": searchValue,
+        "namespaceFilter": namespaceFilter,
+        "searchType": searchType
+    }
+    socket.emit('search', data);
 }
 
 

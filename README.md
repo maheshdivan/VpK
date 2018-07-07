@@ -85,7 +85,7 @@ node server.js  -d /data/components -p 8000
 
 After starting the server a message will be shown indicating the port to be used when opening the browser.  
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/splash.png)
+![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/splash2.png)
 
 Open a browser using the defined port:
 
