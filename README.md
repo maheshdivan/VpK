@@ -85,7 +85,7 @@ node server.js  -d /data/components -p 8000
 
 After starting the server a message will be shown indicating the port to be used when opening the browser.  
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/splash2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/splash2.png)
 
 Open a browser using the defined port:
 
@@ -101,7 +101,7 @@ http://localhost:4200
 ### Home screen:
 
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/home2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/home2.png)
 
 This screen is the interface to search and view the parsed Kubernetes definition files.  The screen is comprised of the following sections:
 
@@ -122,7 +122,7 @@ press the 'X' in the upper right corner to close the menu.
 
 Navigation menu:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/slideoutMenu3.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/slideoutMenu3.png)
 
 <br>
 
@@ -130,7 +130,7 @@ Navigation menu:
 
 The About otpion will dispaly information regarding VpK as seen below:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/about4.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/about4.png)
 
 <br>
 
@@ -144,7 +144,7 @@ Documentation entries, Installation and Usage link to the github page showing th
 
 #### Installation
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/installation.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/installation.png)
 
 #### Usage
 
@@ -162,14 +162,14 @@ The directory to be parsed can be defined as a parameter when starting the serve
 
 Directory input shown when directory is validated successfuly:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/directoryPass.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/directoryPass.png)
 
 <br>
 
 If and invalid directory name is provided the following display is shown:
 
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/directoryFail.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/directoryFail.png)
 
 <br>
 
@@ -178,11 +178,11 @@ bottom portion of the screen shows the currently selected directory.
 
 Example display when the directory is successfully validated and processed.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/inputDirectory.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/inputDirectory.png)
 
 Example display when the directory is not successfully validated.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/directoryinputFail.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/directoryinputFail.png)
 
 
 #### FileUpload
@@ -192,14 +192,14 @@ define a new or existing directory that will be the target for the uploaded file
 Once files are uploaded to the directory use the 'Change Directory' option to parse the
 newly loaded files.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/uploadDir.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/uploadDir.png)
 
 <br>
 <br>
 
 If trying to create a directory and the proper privledges do not exist a message similar to the following will be displayed.  In this example the application was attempting to create a new directory in the root file system.  
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/uploadDirFail2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/uploadDirFail2.png)
 
 If a period is added before the slash to the directory name './Components' it will be created in the current working directory.
 
@@ -217,14 +217,14 @@ The above supported compressed files types will be decompressed into the same di
 If invalid yaml or non-yaml file types are uploaded they will be skipped when the directory is processed.
 
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/uploadReady.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/uploadReady.png)
 
 <br>
 <br>
 
 Uploaded files are represented with a grey square that indicates the file size and file name.  If the name is not fully displayed mouse-over the name to view.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/uploadDone.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/uploadDone.png)
 
 Files uploaded will continue to be shown in the target space.  If you no longer want to view the uploaded files refresh the browser.
 
@@ -236,7 +236,7 @@ Files uploaded will continue to be shown in the target space.  If you no longer 
 Processing statistics for the selected directory are view when this menu option is 
 selected.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/directoryStats.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/directoryStats.png)
 
 <br>
 
@@ -259,23 +259,23 @@ The following table provides the required parameters:
 
 <br>
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/cluster1.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/cluster1.png)
 
 
 <br>
 
 Processing a running IBM Cloud Private instance can take several seconds.  A processing message is displayed to help the user understand.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/cluster4.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/cluster4.png)
 
 
 <br>
 
 Processing will complete with either a message indicating success or failure:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/cluster2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/cluster2.png)
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/cluster3.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/cluster3.png)
 
 <br>
 
@@ -297,7 +297,7 @@ Example:
 Component is the name of the javascript component that generated the message.
 
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/logFile.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/logFile.png)
 
 #### Clear
 
@@ -316,21 +316,21 @@ Select the Namespace dropdown to filter results to a single namespace.
 
 Example Namespace dropdown:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/namespacelist.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/namespacelist.png)
 
 
 Select the Search type dropdown to filter results to a single type. The 'Search type' is list of parsed and located Kubernetes resource types, resource sub-parameters, API types, and user defined types.  For a list of all types refer to section 'Parsed types'.   This dropdown list is dynamic and is populated with the types that are located when files are parsed.
 
 Example Search type dropdown:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/kindslist2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/kindslist2.png)
 
 If a specific value is entered in the 'Search' input field the results will all be filtered to only include
 items that match this search value.  If the Search input field is left blank all items will be returned.
 
 Search results example screen is shown below:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/searchResults.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/searchResults.png)
 
 <br>
 
@@ -340,7 +340,7 @@ From the search results a graphical representation of one or more result items c
 
 Example display of single item:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/displaysingle2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/displaysingle2.png)
 
 <br>
 
@@ -348,12 +348,12 @@ To view more than one item check the box at the beginning of the result item lin
 located above the results table in the upper right corner. 
 
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/selectmultiple.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/selectmultiple.png)
 
 
 Example display of multiple items:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/displaymultiple2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/displaymultiple2.png)
 
 
 If multiple items are selected which are in more than one namespace the display will group selected items by namespace.
@@ -365,7 +365,7 @@ file that was used to define the components.
 To assist in viewing the matching value is highlighted with green background.  There may be multiple occurrences of the data in non-related portions of the configuration file.  Portions
 of the following screen are blurred to hide the IP address of the resources.
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/def3.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/def3.png)
 
 <br>
 <br>
@@ -379,7 +379,7 @@ The file 'Dockerfile' provided can be used to create a docker container for VpK.
 
 Example output from the above command:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/dockerbuild2.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/dockerbuild2.png)
 
 
 <br>
@@ -390,7 +390,7 @@ The newly created container can be run by using the following command:
 
 Example output from the above command:
 
-![HOME](https://github.com/daveweilert/vpk/raw/master/docimages/dockerrun.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/dockerrun.png)
 
 <br>
 <br>
