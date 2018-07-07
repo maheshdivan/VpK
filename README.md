@@ -413,17 +413,19 @@ The following table lists the 'types' that will be parsed from the definition fi
 | Type name | Description | Level | Flagged User
 | :-------: | ---- | ---- | :----: |
 | ApiService | Kubernetes API type | Cluster |
+| Args | Kubernetes sub-param | Workload | Y
 | CertificateSigningRequest | Kubernetes resource type | Cluster |
-| ClusterRoleBinding	| Kubernetes resource type | Cluster |
+| ClusterRoleBinding | Kubernetes resource type | Cluster |
 | ClusterRole | Kubernetes resource type | Cluster |
+| Command | Kubernetes sub-param | Workload | Y
 | ConfigMap | Kubernetes resource type | Config & Storage
-| Container | Kubernetes API type | Workload | Y
 | ContainerImage | Kubernetes sub-param | Workload | Y
 | ContainerName | Kubernetes sub-param | Workload | Y
-| CronBob | Kubernetes resource type | Workload |
+| CronJob | Kubernetes resource type | Workload |
 | DaemonSet | Kubernetes resource type | Workload | 
 | Deployment | Kubernetes resource type | Workload |
 | Endpoints | Kubernetes resource type | Discovery & Load Balancing |
+| Env | Kubernetes sub-param | Workload | Y
 | HorizontalPodAutoscaler | Kubernetes resource type | Metadata |
 | Ingress	| Kubernetes resource type | Discovery & Load Balancing |
 | InitializerConfiguration | Kubernetes API type | Metadata |
@@ -431,6 +433,7 @@ The following table lists the 'types' that will be parsed from the definition fi
 | Labels | Kubernetes sub-param | Multiple |
 | LimitRange | Kubernetes resource type | Metadata |
 | List | User defined type | User | Y
+| Liveness | Kubernetes sub-param | Workload | Y
 | Namespace  | Kubernetes resource type | Cluster |
 | Node | Kubernetes resource type | Cluster |
 | NodeSelector | Kubernetes sub-param | Workload | Y
@@ -438,16 +441,18 @@ The following table lists the 'types' that will be parsed from the definition fi
 | PersistentVolume | Kubernetes resource type | Config & Storage |
 | Pod | Kubernetes resource type | Workload |
 | PodDisruptionBudget | Kubernetes resource type | Metadata |
-| PodPreset | Kubernetes resource type | Metadata |	 
+| PodPreset | Kubernetes resource type | Metadata | 
 | PodSecurityPolicy	| Kubernetes resource type | Metadata |
-| PriorityClass | Kubernetes API type | Metadata |	 
+| PriorityClass | Kubernetes API type | Metadata |
 | NetworkPolicy| Kubernetes resource type | Cluster |
+| Readiness | Kubernetes sub-param | Workload | Y
 | ReplicaSet | Kubernetes resource type | Workload |
 | ReplicationController | Kubernetes resource type | Workload | 
 | ResourceQuota | Kubernetes resource type | Cluster |
-| Role | Kubernetes resource type | Cluster	| 
-| RoleBinding | Kubernetes resource type | Cluster |	 
+| Role | Kubernetes resource type | Cluster | 
+| RoleBinding | Kubernetes resource type | Cluster |
 | Secret  | Kubernetes resource type | Config & Storage |
+| SecretUse  | Kubernetes resource type | Config & Storage | Y
 | Service | Kubernetes resource type | Discovery & Load Balancing |
 | ServiceAccount | Kubernetes resource type | Cluster |
 | StatefulSet | Kubernetes resource type | Workload |
