@@ -6,6 +6,8 @@
 <b>VpK</b> is comprised of a server and browser features.  The server portion is a node.js application that reads and parses Kubernetes definition 'yaml' files.  The browser portion uses javascript and BootStrap.  Communication between the browser and server use both http and web sockets. 
 
 
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/architecture2.png)
+
 
 Application features include:
 
@@ -23,7 +25,7 @@ Application features include:
  
 - View server logs from browser interface
 
-
+	
 
 
 ## Installation
