@@ -252,7 +252,7 @@ The following table provides the required parameters:
 
 | Parameter | Description | Example
 | :-------: | ---- | ---- | 
-| Cluster IP | IP address for the master node | 169.52.48.89 |
+| Cluster IP | IP address for the master node | 172.52.48.89 |
 | Cluster Port | Port number to access the master node | 8443 |
 | Cluster Name | Name of the cluster | mycluster.icp |
 | Namespace | Namespace to process.  Use all-namespaces to process all. | kube-system |
