@@ -290,7 +290,7 @@ Processing will complete with either a message indicating success or failure:
 The logs created on server can be viewed with this menu option.  When selected a modal screen
 is displayed with the log entries.  Log messages use the format - 
 
-	date / time :: component :: message
+	date / time :: message
 
 Example:
 
@@ -299,7 +299,7 @@ Example:
 Component is the name of the javascript component that generated the message.
 
 
-![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/logFile.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/logFile2.png)
 
 #### Clear
 
