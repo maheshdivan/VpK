@@ -266,7 +266,7 @@ The following table provides the required parameters:
 
 <br>
 
-Processing a running IBM Cloud Private instance can take several seconds.  A processing message is displayed to help the user understand.
+The processing of a IBM Cloud Private instance can take several seconds.  A processing message is displayed to help the user understand.
 
 ![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/cluster4.png)
 
