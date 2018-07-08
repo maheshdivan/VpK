@@ -32,6 +32,7 @@ var svgE = 0;
 var baseDir;
 var validDir;
 var newDir;
+var colors;
 
 var files;
 
@@ -107,6 +108,7 @@ $(document).ready(function() {
 
     clearDisplay();
     getSelectLists();
+    getColors();
 
 });
 
@@ -114,6 +116,11 @@ $(document).ready(function() {
 //----------------------------------------------------------
 // socket io definitions for incoming 
 //----------------------------------------------------------
+socket.on('colorsResult', function(data) {
+    colors = data;
+    //console.log(JSON.stringify,null,2);
+});
+
 socket.on('connect', function(data) {
     socket.emit('join', 'Session connected');
 });
@@ -232,6 +239,11 @@ function clearStats() {
     $("#statsData").html('');
 }
 
+// send request to server to get colors
+function getColors() {
+    socket.emit('getColors');
+}
+
 // send request to server to get object definition
 function getDef(def) {
     socket.emit('getDef', def);
@@ -298,6 +310,13 @@ function closeNav() {
 function viewLog() {
     closeNav();
     socket.emit('getLog');
+}
+
+// show color palette
+function viewPalette() {
+    closeNav();
+    buildColorTable();
+    $("#colorModal").modal();
 }
 
 // clear logs on server
@@ -387,6 +406,50 @@ function dynamic() {
 //----------------------------------------------------------
 // populate drop down selections with server provided data
 //----------------------------------------------------------
+
+function buildColorTable() {
+	var html = '<table>';
+	var p1 = '<td width="120px" height="60px" style="background-color:#';
+	var p2 = '; border: 4px solid white; color: #';
+	var p3 = '; font-family: sans-serif; font-size: 11px; ">&nbsp;';
+	var p4 = '</td>';
+	var row = 1;
+	var item = '';
+	var data = colors.colors
+	var bg,tc, tx
+	for (c in data) {
+		//console.log(JSON.stringify(c,null,2))
+		if (row === 1) {
+			html = html + '<tr>';
+		}
+		bg = data[c][0].backgroundColor;
+		tc = data[c][0].textColor;
+		tx = data[c][0].title;
+		
+		item = p1 + bg + p2 + tc + p3 + c  + '<br>&nbsp' + bg + '<br>&nbsp';
+		if (tx !== "") {
+			item = item + tx + p4;
+		} else {
+			item = item + p4;
+		}
+		html = html + item;
+		console.log(item);
+		item = '';
+		row++
+		if (row === 6) {
+			html = html + '</tr>';
+			row = 1;
+		}
+	}
+	if (row !== 1) {
+		html = html + '</tr></table>';
+	} else {
+		html = html + '</table>';
+	}
+	$("#colorContents").empty();
+    $("#colorContents").html(html);
+    
+}
 
 
 function populateSelectLists(data) {

@@ -76,6 +76,8 @@
             <span style="color: white; padding-left: 15px;">Logs</span>
             <a href="javascript:viewLog()">View</a>
             <a href="javascript:clearLog()">Clear</a>
+            <span style="color: white; padding-left: 15px;">Colors</span>
+            <a href="javascript:viewPalette()">Show Palette</a>
         </div>
         <div id="main">
             <!-- ==================================== -->
@@ -369,6 +371,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- ==================================== -->
+        <!-- Color Palette Modal section          -->
+        <!-- ==================================== -->
+        <div class="modal fade" id="colorModal" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="colorHeader">
+                            <h6 class="modal-title">Color Palette</h6>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+						<div style="font-size: 80%;">
+						    <p>To modify the color palette edit the configuration file <span style="color: green; font-style: italic; font-weight: bold;">colors.json</span>.  This file is located in the directory where you started VpK. 
+						       After editing save the file and restart the VpK server and refresh the browser session.
+						    </p>
+						    
+						</div>
+                        <div id="colorContents" style="align: center;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
         <!-- ==================================== -->
         <!-- Server log Modal section             -->

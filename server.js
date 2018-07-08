@@ -54,6 +54,7 @@ var cors = require('cors');
 //------------------------------------------------------------------------------
 // Application variables
 //------------------------------------------------------------------------------
+var colors = '';
 var dest = './uploads'
 var zips = [];
 var targz = [];
@@ -334,6 +335,11 @@ io.on('connection', function(client) {
             });
     });
 
+    client.on('getColors', function() {
+        utl.logMsg('vpkMNL077 - GetColors request', 'server');
+        var result = {'colors': vpk.colors};
+        client.emit('colorsResult', result);
+    });
 
     client.on('getDef', function(data) {
         // save the key for use when results are returned
@@ -679,6 +685,7 @@ function checkAgain() {
 
 function startServer() {
     splash();
+    getColors();
     utl.logMsg('vpkMNL014 - VpK Server started, port: ' + port, 'server');
     server.listen(port);
 }
@@ -702,6 +709,27 @@ function splash() {
         raw: true,
     }]);
     console.log(adv);
+}
+
+
+function getColors() {
+    utl.getColors()
+        .then(function(data) {
+			colors = JSON.parse(data)
+            utl.logMsg('vpkMNL350 - Loaded colors', 'server');
+                            	// populate cldr object with config parms
+            try {
+                vpk.colors = JSON.parse(data);
+                //console.log(JSON.stringify(vpk.colors,null,2));
+            } catch (e) {
+                utl.logMsg('vpkUTL035 - Colors file: colors.json has invalid format, message: ' + e, 'utl');
+            }
+            
+        })
+        .catch(function(err) {
+            utl.logMsg('vpkMNL351 - Failed to load colors ' + err, 'server');
+            process.exit(-1);
+        });
 }
 
 //begin processing

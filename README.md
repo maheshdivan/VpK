@@ -124,7 +124,7 @@ press the 'X' in the upper right corner to close the menu.
 
 Navigation menu:
 
-![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/slideoutMenu3.png)
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/slideoutMenu4.png)
 
 <br>
 
@@ -305,6 +305,26 @@ Component is the name of the javascript component that generated the message.
 
 This menu option will clear the server logs.
 
+
+<br>
+
+----
+
+### Colors
+
+#### Show Palette
+
+This option will display the palette of kinds that will be drawn.  Each entry is shown with the associated background color, hex color code, and the short description if defined.  
+
+
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/palette.png)
+
+To modify the color palette edit the configuration file colors.json. This file is located in the directory where you started VpK. After editing save the file and restart the VpK server and refresh the browser session.
+
+Example colors.json file:
+
+![HOME](https://github.com/IBM-ICP-CoC/VpK/raw/master/docimages/colorsJson.png)
+ 
 <br>
 <br>
 <br>

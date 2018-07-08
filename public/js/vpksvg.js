@@ -25,7 +25,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // build svg data from returned data
 //----------------------------------------------------------
 function svgResult(data) {
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     var sbase = ' ';
     var tmp = ' ';
     var ns;
@@ -142,9 +142,19 @@ function writeCircle(x, y, r) {
 function writeBox(x, y, h, w, kind, src, part, objname) {
 	svgE++;	
 	var sq = "'";
-	var data;
 	var color;
 	var name;
+    var text;
+	var data = setData(kind); 
+
+	color = data[0];
+	text = data[1];
+	if (data[2] !== "") {
+		name = data[2];
+	} else {
+		name = kind;
+	}
+
     var ent1 = '<g><g id="svge';
     var ent2 = '" onclick="getDef(';
     var ent3 = ')"><title>';         // source file name  
@@ -153,19 +163,12 @@ function writeBox(x, y, h, w, kind, src, part, objname) {
     var ent6 = '"  height="';              // heigth
     var ent7 = '" width="';                // width
     var ent8 = '" fill="#';                //color
-    var ent9 = '" stroke="#000000" stroke-width="0.5"  rx="6" ry="6" /><text x="'
-	var ent10 = '"  y="'
+    var ent9 = '" stroke="#000000" stroke-width="0.5"  rx="6" ry="6" /><text x="'  // border 
+	var ent10 = '"  y="'  // border continued
 	var ent11 = '"  xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="12" ' +
-                      'fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#fff" fill="#fff">';
+                      'fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#' + text + '" fill="#' + text + '">';
 	var ent12 = '</text></g></g>';
 
-	data = setData(kind); 
-	color = data[0];
-	if (data.length > 1) {
-		name = data[1];
-	} else {
-		name = kind;
-	}
 	var tx = x + 3;
 	var ty = y + 20;
 
@@ -184,229 +187,21 @@ function writeBoundary(x, y, h, w, kind, src, part, objname) {
 
 }
 
-
-//set color and display name truncated to fit display block 
+// colors for background and text are defined in the colors.json file that is read
+// by the server and pasted to browser.  Update that file to change the colors for
+// a specific kind.
 function setData(type) {
-        // find and filter
-        var data = [];
-        switch (type) {
-            case 'APIService':
-                data.push('330033');
-                break;
-            case 'Args':
-                data.push('440033');
-                break;
-            case 'CertificateSigningRequest':
-                data.push('003399');
-                data.push('Cert\'Sign\'Req')
-                break;
-            case 'Command':
-                data.push('003399');
-                break;
-            case 'ConfigMap':
-                data.push('003399');
-                break;
-            case 'Container':
-                data.push('339933');
-                break;
-            case 'ContainerImage':
-                data.push('ffd700');
-                break;
-            case 'ContainerName':
-                data.push('ffa500');
-                break;
-            case 'ContainerPort':
-                data.push('5b7c98');
-                break;
-            case 'ClusterRole':
-                data.push('330033');
-                break;
-            case 'ClusterRoleBinding':
-                data.push('330033');
-                data.push('Clus\'Role\'Bind')
-                break;
-            case 'CronJob':
-                data.push('330033');
-                break;
-            case 'CustomResourceDefinition':
-                data.push('330033');
-                break;
-            case 'DaemonSet':
-                data.push('008b8b');
-                break;
-            case 'Deployment':
-                data.push('33cccc');
-                break;
-            case 'Endpoints':
-                data.push('330033');
-                break;
-            case 'Env':
-                data.push('003399');
-                break;
-            case 'HorizontalPodAutoscaler':
-                data.push('df3a01');
-                data.push('Horz\'PodAuto\'')
-                break;
-            case 'Ingress':
-                data.push('df3a01');
-                break;
-            case 'InitContainer':
-                data.push('336699');
-                break;
-            case 'InitializerConfiguration':
-                data.push('336699');
-                break;
-            case 'Job':
-                data.push('6b8e23');
-                break;
-            case 'Labels':
-                data.push('cd5c5c');
-                break;
-            case 'LabelsSpecTemplate':
-                data.push('330033');
-                data.push('Label\'Spc\'Tmpl')
-                break;
-            case 'LimitRange':
-                data.push('cd5c5c');
-                break;
-            case 'List':
-                data.push('330033');
-                break;
-            case 'LivenessProbe':
-                data.push('330033');
-                data.push('Liveness\'Prb');
-                break;
-            case 'Namespace':
-                data.push('330033');
-                break;
-            case 'NetworkPolicy':
-                data.push('330033');
-                break;
-            case 'NodeSelector':
-                data.push('330033');
-                break;
-            case 'Node':
-                data.push('330033');
-                break;
-            case 'Path':
-                data.push('5858fa');
-                break;
-            case 'PersistentVolume':
-                data.push('f4a460');
-                data.push('Persistent\'Vol');
-                break;    
-            case 'PersistentVolumeClaim':
-                data.push('a52a2a');
-                data.push('Persist\'Vol\'Clm')
-                break;
-            case 'Pod':
-                data.push('330033');
-                break;
-            case 'PodPreset':
-                data.push('330033');
-                break;
-            case 'PodDisruptionBudget': 
-                data.push('330033');
-				data.push('PodDisrup\'Bgt');
-                break;
-            case 'PodSecurityPolicy':
-                data.push('330033');
-                data.push('PodSec\'Policy')
-                break;
-            case 'PodTemplate':
-                data.push('330033');
-                break;
-            case 'PriorityClass':
-                data.push('330033');
-                break;
-            case 'PV-Access':
-                data.push('32cd32');
-                break;
-            case 'PV-Reclaim':
-                data.push('cd5c5c');
-                break;
-            case 'PV-StorClass':
-                data.push('b22222');
-                break;
-        	case 'ReadinessProbe':
-                data.push('4b0082');
-                data.push('Readiness\'Prb');
-                break;
-            case 'ReplicaSet':
-                data.push('330033');
-                break;
-            case 'ReplicationController':
-                data.push('330033');
-                data.push('Rep\'Controller');
-                break;
-            case 'ResourceQuota':
-                data.push('330033');
-                break;
-            case 'Role':
-                data.push('330033');
-                break;
-            case 'RoleBinding':
-                data.push('330033');
-                break;
-            case 'Secret':
-                data.push('D9182D');
-                break;
-            case 'SecretUse':
-                data.push('00182D');
-                break;
-            case 'Selector':
-                data.push('330033');
-                break;
-            case 'Service':
-                data.push('00bfff');
-                break;
-            case 'ServiceAccount':
-                data.push('00bfff');
-                break;
-            case 'ServicePort':
-                data.push('ffa07a');
-                data.push('Port');
-                break;
-            case 'SourceFile':
-                data.push('222222');
-                break;
-            case 'StatefulSet':
-                data.push('666666');
-                break;
-            case 'StorageClass':
-                data.push('6699bb');
-                data.push('StorageClass');
-                break;
-            case 'TokenReview':
-                data.push('77446d');
-                break;
-            case 'Tolerations':
-                data.push('77446d');
-                break;
-            case 'Volume':
-                data.push('dd6644');
-                break;
-            case 'VolumeAttachment':
-                data.push('330033');
-                data.push('Vol\'Attach\'');
-                break;
-            case 'VolumeClaimTemplates':
-                data.push('2f4f4f');
-                data.push('VolClmTemplt');
-                break;
-            case 'VolumeMount':
-                data.push('b8995B');
-                break;
-            case 'VolumeMounts':
-                data.push('b8995B');
-                break;
-            default:
-                console.log('Undefined kind: ' + type);
-                data.push('ff0000');
-                data.push('Not in list');
-            }
-             return data;
+	if (typeof colors.colors[type] === 'undefined') {
+		console.log('Undefined kind: ' + type);
+		type = 'default'
+	}
+    var data = [];
+    data.push(colors.colors[type][0].backgroundColor);
+    data.push(colors.colors[type][0].textColor);
+    data.push(colors.colors[type][0].title);
+	return data;	
 }
+
 
 //----------------------------------------------------------
 console.log('loaded vpksvg.js');
