@@ -294,7 +294,7 @@ is displayed with the log entries.  Log messages use the format -
 
 Example:
 
-2018-3-4 16:01:57 :: server :: Dirs read  21
+2018-3-4 16:01:57 :: Dirs read  21
 
 Component is the name of the javascript component that generated the message.
 
